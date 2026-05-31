@@ -8,7 +8,12 @@ function Board() {
 
 	// 2. 화면이 처음 켜질 때 서버에 데이터를 요청하는 훅
 	useEffect(() => {
-		axios.get('http://localhost:8080/api/posts')
+		const token = localStorage.getItem('accessToken');
+		axios.get('http://localhost:8080/api/posts', {
+			headers: {
+				Authorization: `Bearer ${token}`
+			}
+		})
 			.then(response => {
 				// 3. 성공시 서버에서 받아온 데이터를 state에 저장
 				console.log('게시글을 불러왔습니다.');
