@@ -8,21 +8,19 @@ const Signup = ({ onSigninClick }) => {
   const [error, setError] = useState('');
 
   const handleSubmit = async (event) => {
-	event.preventDefault();
-	setError(''); // Clear previous error messages
+    event.preventDefault();
+    setError(''); // Clear previous error messages
+    const url = 'http://localhost:8080/api/signup';
+    const data = { email, password, username };
 
-	try {
-		axios.post('http://localhost:8080/api/signup', { email, password })
-			.then(response => {
-				alert('회원가입 성공!');
-				if (onSigninClick) onSigninClick(); // 회원가입 성공 후 로그인 페이지로 이동
-			})
-			.catch(err => {
-				setError(err.response?.data?.message || '회원가입 실패. 다시 시도해주세요.');
-			});
-	} catch (err) {
-		setError('회원가입 중 오류가 발생했습니다. 다시 시도해주세요.');
-	}
+    await axios.post(url, data)
+    .then(response => {      
+      console.log('회원가입 성공:', response.data);
+      if (onSigninClick) onSigninClick(); // 회원가입 성공 후 로그인 페이지로 이동
+    }).catch(error => {
+      console.error('회원가입 실패:', error.response?.data || error.message);
+      setError(error.response?.data?.message || '회원가입 실패. 다시 시도해주세요.');
+    });
   };
 
   return (
