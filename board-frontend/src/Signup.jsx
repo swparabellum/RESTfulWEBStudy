@@ -4,6 +4,7 @@ import axios from 'axios';
 const Signup = ({ onSigninClick }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
   const [error, setError] = useState('');
 
   const handleSubmit = async (event) => {
@@ -28,15 +29,20 @@ const Signup = ({ onSigninClick }) => {
     <section>
       <h2>Sign Up</h2>
       <form onSubmit={handleSubmit}>
-          <div className="mb-3">
+          <div>
               <label htmlFor="email">이메일</label>
               <input type="email" id="email" name="email"
           value={email} onChange={(event) => setEmail(event.target.value)} required/>
           </div>
-          <div className="mb-3">
+          <div>
               <label htmlFor="pwd">비밀번호</label>
               <input type="password" id="pwd" name="pwd"
           value={password} onChange={(event) => setPassword(event.target.value)} required/>
+          </div>
+                    <div>
+              <label htmlFor="username">닉네임</label>
+              <input type="text" id="username" name="username"
+          value={username} onChange={(event) => setUsername(event.target.value)} required/>
           </div>
           <div>
               <button type="submit">회원가입</button>
