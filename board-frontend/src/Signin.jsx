@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-
-const Signin = ({ onLogin }) => {
+const Signin = ({ onLogin, onSignupClick }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -27,7 +26,7 @@ const Signin = ({ onLogin }) => {
       <h2>Sign In</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Email:</label>
+          <label>이메일</label>
           <input 
             type="email" 
             value={email} 
@@ -36,7 +35,7 @@ const Signin = ({ onLogin }) => {
           />
         </div>
         <div>
-          <label>Password:</label>
+          <label>비밀번호</label>
           <input 
             type="password" 
             value={password} 
@@ -45,8 +44,12 @@ const Signin = ({ onLogin }) => {
           />
         </div>
         {error && <p style={{ color: 'red' }}>{error}</p>}
-        <button type="submit">Login</button>
+        <button type="submit">로그인</button>
       </form>
+      <div>
+        <span>계정이 없으신가요? </span>
+        <button type="button" onClick={onSignupClick}>회원가입</button>
+      </div>
     </section>
   );
 };

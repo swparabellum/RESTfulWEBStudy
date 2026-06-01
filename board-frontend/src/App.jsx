@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
 import Board from './Board';
 import Signin from './Signin';
+import Signup from './Signup';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [view, setView] = useState('signin'); // 'signin' or 'signup'
 
   useEffect(() => {
     const token = localStorage.getItem('accessToken');
@@ -21,6 +23,9 @@ function App() {
     setIsLoggedIn(false);
   };
 
+  const showSignup = () => setView('signup');
+  const showSignin = () => setView('signin');
+
   return (
     <div className="App">
       {isLoggedIn ? (
@@ -29,7 +34,11 @@ function App() {
           <Board />
         </div>
       ) : (
-        <Signin onLogin={handleLogin} />
+        view === 'signin' ? (
+          <Signin onLogin={handleLogin} onSignupClick={showSignup} />
+        ) : (
+          <Signup onSigninClick={showSignin} />
+        )
       )}
     </div>
   );
