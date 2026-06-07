@@ -15,7 +15,7 @@ public class UserController {
 
     @PostMapping("/signin")
     public LoginResponse signin(@RequestBody LoginRequest loginRequest) {
-        System.out.println("UserController signin 동작." );
+//        System.out.println("UserController signin 동작." );
         String token = userService.signin(loginRequest.getEmail(), loginRequest.getPassword());
         return new LoginResponse(token);
     }

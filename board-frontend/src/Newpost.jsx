@@ -3,14 +3,14 @@ import axios from 'axios';
 
 function Newpost() {
 	const [title, setTitle] = useState('');
-	const [detail, setDetail] = useState('');
+	const [content, setContent] = useState('');
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const token = localStorage.getItem('accessToken');
 		try {
 			const response = await axios.post('http://localhost:8080/api/newpost',
-				{ title, detail },
+				{ title, content },
 				{
 					headers: {
 						Authorization: `Bearer ${token}`
@@ -19,7 +19,7 @@ function Newpost() {
 			);
 			alert('게시글이 등록되었습니다!');
 			setTitle('');
-			setDetail('');
+			setContent('');
 		} catch (error) {
 			console.error('게시글 등록 실패:', error);
 			alert('게시글 등록에 실패했습니다. 다시 시도해주세요.');
@@ -39,9 +39,9 @@ function Newpost() {
 						onChange={(e) => setTitle(e.target.value)}
 						/></td></tr>
 						<tr><td className="header">Comment</td></tr>
-						<tr><td><textarea placeholder="내용을 입력하세요" name="detail"
-						value={detail}
-						onChange={(e) => setDetail(e.target.value)}
+						<tr><td><textarea placeholder="내용을 입력하세요" name="content"
+						value={content}
+						onChange={(e) => setContent(e.target.value)}
 						></textarea></td></tr>
 						<tr><td><button type="submit">등록</button></td></tr>
 					</tbody>
