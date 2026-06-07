@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-function Board() {
+function Board({ onLogout }) {
+	const navigate = useNavigate();
 
 	// 1. 서버에서 받아온 게시글을 저장할 state 정의
 	const [posts, setPosts] = useState([]);
@@ -26,7 +28,13 @@ function Board() {
 
 	return (
     <div style={{ padding: '20px' }}>
-      <h2>간단한 게시판 목록</h2>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+        <h2>간단한 게시판 목록</h2>
+        <div>
+          <button onClick={() => navigate('/newpost')} style={{ marginRight: '10px' }}>글쓰기</button>
+          <button onClick={onLogout} style={{ backgroundColor: '#ff4d4d', color: 'white', border: 'none', padding: '5px 10px', cursor: 'pointer' }}>로그아웃</button>
+        </div>
+      </div>
       <table border="1" style={{ width: '100%', borderCollapse: 'collapse' }}>
         <thead>
           <tr>

@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-route
 import Board from './Board';
 import Signin from './Signin';
 import Signup from './Signup';
+import Newpost from './Newpost';
 import ProtectedRoute from './ProtectedRoute';
 
 function AppRoutes() {
@@ -43,6 +44,7 @@ function AppRoutes() {
       {/* 보호된 경로 */}
       <Route element={<ProtectedRoute isLoggedIn={isLoggedIn} />}>
         <Route path="/board" element={<Board onLogout={handleLogout} />} />
+        <Route path="/newpost" element={<Newpost />} />
       </Route>
 
       {/* 잘못된 경로 처리 */}
